@@ -1,4 +1,4 @@
-package javaCourse;
+/* package javaCourse;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import j
@@ -164,7 +164,7 @@ public class Lesson1_1 {
         // System.out.println(maoz)
         // output: smadja hagever
         str2.concat("addd");
-*/
+ d
        //whats the difference between int[] intArr and int intArr[]
         
         int[] intArr = new int[] { 1, 2, 4, 5, 6 };

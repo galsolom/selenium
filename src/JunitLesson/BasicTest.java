@@ -21,7 +21,9 @@ import WDriver.LoggerTry;
 import WDriver.FirefoxWebDriver;
 import WDriver.Pages;
 import WDriver.utils;
+import WDriver.utils.rm;
 import WDriver.utils.autoUtils;
+
 
 public class BasicTest {
 public GenericWebDriver webdriver;
@@ -78,9 +80,13 @@ public void assertString(String expected, String actual){
 		
 		@Test
 		public void tryX(){
-			assertString("s", "s");
-			log.info("asdxxx");
-			log.error("errorduh");
+			assertString("s", "ss");
+			log.trace("trace log");
+			log.info("info log");
+			log.error("error log");
+			log.fatal("fatal log");
+			log.warn("warn log");
+			log.debug("debug log");
 		}
 @Test
 public void testOpenBrowser() throws Exception{
@@ -135,37 +141,41 @@ public void testOpenBrowser() throws Exception{
 
 	
 }
+	
 	@Test
 	public void BugReporting() throws Exception{
-		webdriver.openUrl("http://localhost:8080");
-		webdriver.getElement(ByT.ID, "bitnami-link").click();
-		webdriver.getElement(ByT.CLASS, "login").click();
+		webdriver.openUrl(rm.rmUrl);
+		log.info("Bug Report Session Started" + curDate);
+		webdriver.getElement(ByT.ID, rm.rmAccessBtnID).click();
+		webdriver.getElement(ByT.CLASS, rm.rmPageLgnBtnCls ).click();
 		Thread.sleep(2000);
-		webdriver.getElement(ByT.ID, "username").sendKeys("gals");
-		webdriver.getElement(ByT.ID, "password").sendKeys("r123123");
-		webdriver.getElement(ByT.NAME, "login").click();
-		webdriver.getElement(ByT.CLASS, "projects").click();
-		webdriver.getElement(ByT.XPATH, "//*[@id='projects-index']/ul/li/div/a").click();
-		webdriver.getElement(ByT.CLASS, "issues").click();
-		webdriver.getElement(ByT.XPATH, "//*[@id='content']/div[1]/a").click();
-		String subjName = "Automated BR subject" + curDate;
+		webdriver.getElement(ByT.ID, rm.rmUserID).sendKeys(rm.rmUserValue);
+		webdriver.getElement(ByT.ID, rm.rmPassID).sendKeys(rm.rmPasswordValue);
+		webdriver.getElement(ByT.NAME, rm.rmUseLgnBtnName).click();
+		webdriver.getElement(ByT.CLASS, rm.rmProjectsBtnCls).click();
+		webdriver.getElement(ByT.XPATH, rm.rmFirstProjBtnXP).click();
+		webdriver.getElement(ByT.CLASS, rm.rmIssuesBtnCls).click();
+		webdriver.getElement(ByT.XPATH, rm.rmNewIssueBtnXP).click();
+		//Generating Issue Name + Current Time & Date
+		String subjName = rm.rmSubjectContent + curDate;
+		// Final string to validate against later.
 		 final String subjNameDate = subjName;
 		
-		webdriver.getElement(ByT.ID, "issue_subject").sendKeys(subjName);
-		webdriver.getElement(ByT.ID, "issue_description").sendKeys("Automated BR description");
+		webdriver.getElement(ByT.ID, rm.rmSubjectFieldID).sendKeys(subjName);
+		webdriver.getElement(ByT.ID, rm.rmDescFieldID).sendKeys(rm.rmDescValue);
 		// select priority
-		new Select(webdriver.getElement(ByT.ID, "issue_priority_id")).selectByVisibleText("Immediate");
+		new Select(webdriver.getElement(ByT.ID, rm.rmIssuePriorityLiID)).selectByVisibleText(rm.rmIssuePriorityValue);
 		// select assignee
-		new Select(webdriver.getElement(ByT.ID, "issue_assigned_to_id")).selectByVisibleText("Gal Admin");
+		new Select(webdriver.getElement(ByT.ID, rm.rmIssueAssigneeID)).selectByVisibleText(rm.rmIssueAsigneeValue);
 		// select severity
-		new Select(webdriver.getElement(ByT.ID, "issue_custom_field_values_1")).selectByVisibleText("Very High / Showstopper");
+		new Select(webdriver.getElement(ByT.ID, rm.rmSeverityID)).selectByVisibleText(rm.rmSeverityValue);
 		// stam
 		Thread.sleep(2000);
-		new Select(webdriver.getElement(ByT.ID, "issue_custom_field_values_3")).selectByVisibleText("fliklak critical sapir");
+		new Select(webdriver.getElement(ByT.ID, rm.rmStamFieldID)).selectByVisibleText(rm.rmStamValue);
 		Thread.sleep(2000);
-		webdriver.getElement(ByT.NAME, "commit").click();
-		//asserting subject
-		assertString(subjNameDate, webdriver.getElement(ByT.XPATH, "//*[@id='content']/div[3]/div[2]/div/h3").getText());
+		webdriver.getElement(ByT.NAME, rm.rmCreateIssueBtnName).click();
+		//asserting subject name with prior subject name entrance
+		assertString(subjNameDate, webdriver.getElement(ByT.XPATH, rm.rmFirstIssueLiXP).getText());
 	
 		Thread.sleep(5000);
 		
