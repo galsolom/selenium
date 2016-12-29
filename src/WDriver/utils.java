@@ -15,19 +15,6 @@ public class utils {
         public static String LoginBtnXP = "//button[@class='radius']";
         public static String OKmsgCS = "div#flash.flash.success";
         
-        //www.svcollege.co.il test project
-        
-        public static String SVCLandingP = "http://www.svcollege.co.il";
-        public static String SVUserNtest = "טסט אוטומטי";
-        public static String SVEmailtest = "svciqa@gmail.com";
-        public static String SVPhonetest = "0526384303";
-        public static String SVNameFName = "form_name";
-        public static String SVTelFName =  "form_tel";
-        public static String SVEmailFName = "form_email";
-        public static String SVSendBtnXP = "//*[@id='wpcf7-f5-o1']/form/div[2]/div/fieldset[4]/div/input";
-        public static String SVLeadRecCS = "wpcf7-response-output wpcf7-display-none wpcf7-mail-sent-ok";
-        
-
     }
     
     public static class rm{
