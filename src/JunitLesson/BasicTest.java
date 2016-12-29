@@ -119,20 +119,7 @@ public void testOpenBrowser() throws Exception{
 		assertString("1111111","1111111");
 	
 }
-	
-	@Test
-	public void LeadIns() throws Exception{
-		webdriver.openUrl(autoUtils.SVCLandingP);
-		pages.internetPO.getEmailField().sendKeys(autoUtils.SVEmailtest);
-		pages.internetPO.getPhoneField().sendKeys(autoUtils.SVPhonetest);
-		pages.internetPO.getUserField().sendKeys(autoUtils.SVUserNtest);
-		pages.internetPO.getSendBtn().click();
-		Thread.sleep(10000);
-		webdriver.getElement(ByT.CLASS, autoUtils.SVLeadRecCS).isDisplayed();
-	}
-	
-	
-	
+
 	
 	@Test
 	public void setup2() throws InterruptedException{
